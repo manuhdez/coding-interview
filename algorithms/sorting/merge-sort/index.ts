@@ -1,18 +1,18 @@
 /**
  * Sorts any given array of numbers with the merge sort algorithm.
- * Time complexity O(n log n)
+ * - Time complexity O(n log n)
+ * - Space complexity O(n)
  */
 export default function mergeSort(array: number[]): number[] {
-  const middlePosition = Math.ceil((array.length - 1) / 2);
+  const middle = Math.floor(array.length / 2);
+  const left = array.slice(0, middle);
+  const right = array.slice(middle);
 
-  if (array.length <= 2) {
-    return array.sort(sortNumbersAscending);
+  if (array.length === 1) {
+    return array;
   }
 
-  return merge(
-    mergeSort(array.slice(0, middlePosition)),
-    mergeSort(array.slice(middlePosition))
-  );
+  return merge(mergeSort(left), mergeSort(right));
 }
 
 const sortNumbersAscending = (a: number, b: number) => a - b;
