@@ -15,3 +15,23 @@ export default function houseRobber(houses: number[]): number {
 
   return totals[totals.length - 1];
 }
+
+export function houseRobberTwo(houses: number[]): number {
+  if (!houses || !houses.length) return 0;
+  if (houses.length === 1) return houses[0];
+
+  const totals: [number, number] = [0, 0];
+
+  let idx: number = 0;
+  for (let house of houses) {
+    if (idx % 2 === 0) {
+      totals[0] += house;
+    } else {
+      totals[1] += house;
+    }
+
+    idx += 1;
+  }
+
+  return Math.max(...totals);
+}
