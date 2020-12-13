@@ -1,3 +1,5 @@
+import { TreeNode } from "../index"
+
 export class BinaryTreeNode implements TreeNode {
   value: number;
   left = null;
@@ -60,5 +62,28 @@ export default class BinarySearchTree implements BinaryTree {
     return newNode;
   };
 
-  lookup = (value: number) => {};
+  /**
+   * Looks for a node with the given value and returns it
+   */
+  lookup = (value: number): BinaryTreeNode | null => {
+    if (!this.root) return null;
+
+    let result: BinaryTreeNode | null = null;
+    let current: BinaryTreeNode | null = this.root;
+
+    while(current) {
+      if (current.value === value) {
+        result = current;
+        break;
+      } 
+
+      if (value < current.value) {
+        current = current.left;
+      } else {
+        current = current.right;
+      }
+    }
+
+    return result;
+  };
 }

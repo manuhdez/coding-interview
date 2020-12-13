@@ -65,5 +65,33 @@ describe("BinarySearchTree", () => {
     })
   });
 
-  describe.skip("Node lookup", () => {});
+  describe("Node lookup", () => {
+    let tree: BinarySearchTree; 
+    const treeValues = [25, 37, 27, 32, 39, 23];
+    beforeEach(() => {
+      tree = new BinarySearchTree(rootNode);
+      for (let value of treeValues) {
+        tree.insert(value);
+      }
+    });
+
+    test("Can find a node with a value that is stored in the tree", () => {
+      const searchValues = [30, 32, 23];
+      for (let searchValue of searchValues) {
+        const lookupResult = tree.lookup(searchValue);
+
+        expect(lookupResult).not.toBeNull();
+        expect(lookupResult instanceof BinaryTreeNode).toEqual(true);
+        expect(lookupResult.value).toEqual(searchValue);
+      }
+    });
+
+    test("Returns null if the value cannot be found in the tree", () => {
+      const searchValues = [1, 28, 9, 15];
+      for (let searchValue of searchValues) {
+        const lookupResult = tree.lookup(searchValue);
+        expect(lookupResult).toBeNull();
+      }
+    });
+  });
 })
